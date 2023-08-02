@@ -2,20 +2,30 @@ pub fn caesar_cipher(text: &str, shift: i8) -> String {
     let mut new_text = String::new();
     for character in text.chars() {
         if character.is_alphabetic() {
-            let mut new_letter = character as i8 + shift;
-            while new_letter > 90 {
-                new_letter = new_letter - 26;
+            if character.is_uppercase() {
+                new_text.push(caesar_shift(character, shift));
+            } else {
+                let temp = caesar_shift(character.to_ascii_uppercase(), shift);
+                new_text.push(temp.to_ascii_lowercase());
             }
-            while new_letter < 65 {
-                new_letter = new_letter + 26;
-            }
-            let final_letter = new_letter as u8;
-            new_text.push(final_letter as char);
         } else {
             new_text.push(character);
         }
     }
     new_text
+}
+
+fn caesar_shift(character: char, shift: i8) -> char {
+    let mut new_letter = character as i8 + shift;
+
+    while new_letter > 90 {
+        new_letter = new_letter - 26;
+    }
+    while new_letter < 65 {
+        new_letter = new_letter + 26;
+    }
+    let final_code = new_letter as u8;
+    return final_code as char;
 }
 
 #[cfg(test)]
@@ -27,6 +37,16 @@ mod tests {
         let plaintext = "0ABCD!";
         let shift = 26;
         let expected_ciphertext = "0ABCD!";
+
+        let ciphertext = caesar_cipher(plaintext, shift);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn caesar_cipher_encrypt_simple_lower() {
+        let plaintext = "0abc!";
+        let shift = 5;
+        let expected_ciphertext = "0fgh!";
 
         let ciphertext = caesar_cipher(plaintext, shift);
         assert_eq!(ciphertext, expected_ciphertext);
