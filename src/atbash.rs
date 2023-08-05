@@ -1,8 +1,8 @@
 pub fn atbash_cipher(input: &str) -> String {
     let mut new_text = String::new();
     for character in input.chars() {
-        if (character.is_alphabetic()) {
-            if (character.is_uppercase()) {
+        if character.is_alphabetic() {
+            if character.is_uppercase() {
                 new_text.push(atbash_shift(character));
             } else {
                 let temp = atbash_shift(character.to_ascii_uppercase());
@@ -28,37 +28,37 @@ mod tests {
 
     #[test]
     fn atbash_cipher_encrypt_simple() {
-        let plaintext = "0ABCD!";
+        let plain_text = "0ABCD!";
         let expected_ciphertext = "0ZYXW!";
 
-        let ciphertext = atbash_cipher(plaintext);
+        let ciphertext = atbash_cipher(plain_text);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
     #[test]
     fn caesar_cipher_encrypt_simple_lower() {
-        let plaintext = "0abc!";
+        let plain_text = "0abc!";
         let expected_ciphertext = "0zyx!";
 
-        let ciphertext = atbash_cipher(plaintext);
+        let ciphertext = atbash_cipher(plain_text);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
     #[test]
     fn atbash_cipher_encrypt() {
-        let plaintext = "HELLO, WORLD!";
+        let plain_text = "HELLO, WORLD!";
         let expected_ciphertext = "SVOOL, DLIOW!";
 
-        let ciphertext = atbash_cipher(plaintext);
+        let ciphertext = atbash_cipher(plain_text);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
     #[test]
     fn atbash_cipher_decrypt() {
         let ciphertext = "SVOOL, DLIOW!";
-        let expected_plaintext = "HELLO, WORLD!";
+        let expected_plain_text = "HELLO, WORLD!";
 
         let decrypted_text = atbash_cipher(ciphertext);
-        assert_eq!(decrypted_text, expected_plaintext);
+        assert_eq!(decrypted_text, expected_plain_text);
     }
 }

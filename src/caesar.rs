@@ -34,31 +34,31 @@ mod tests {
 
     #[test]
     fn caesar_cipher_encrypt_simple() {
-        let plaintext = "0ABCD!";
+        let plain_text = "0ABCD!";
         let shift = 26;
         let expected_ciphertext = "0ABCD!";
 
-        let ciphertext = caesar_cipher(plaintext, shift);
+        let ciphertext = caesar_cipher(plain_text, shift);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
     #[test]
     fn caesar_cipher_encrypt_simple_lower() {
-        let plaintext = "0abc!";
+        let plain_text = "0abc!";
         let shift = 5;
         let expected_ciphertext = "0fgh!";
 
-        let ciphertext = caesar_cipher(plaintext, shift);
+        let ciphertext = caesar_cipher(plain_text, shift);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
     #[test]
     fn caesar_cipher_encrypt() {
-        let plaintext = "HELLO, WORLD!";
+        let plain_text = "HELLO, WORLD!";
         let shift = 3;
         let expected_ciphertext = "KHOOR, ZRUOG!";
 
-        let ciphertext = caesar_cipher(plaintext, shift);
+        let ciphertext = caesar_cipher(plain_text, shift);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
@@ -66,9 +66,9 @@ mod tests {
     fn caesar_cipher_decrypt() {
         let ciphertext = "KHOOR, ZRUOG!";
         let shift = 3;
-        let expected_plaintext = "HELLO, WORLD!";
+        let expected_plain_text = "HELLO, WORLD!";
 
         let decrypted_text = caesar_cipher(ciphertext, -shift);
-        assert_eq!(decrypted_text, expected_plaintext);
+        assert_eq!(decrypted_text, expected_plain_text);
     }
 }
