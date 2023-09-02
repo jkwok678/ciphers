@@ -30,10 +30,40 @@ mod tests {
     use super::*;
 
     #[test]
-    fn column_transposition_cipher_encrypt_simple() {
+    fn encrypt_upper() {
         let plain_text = "HELLOWORLD";
         let key = "KEY";
         let expected_ciphertext = "EORHLODLWL";
+
+        let ciphertext = column_transposition_cipher(plain_text, key);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn encrypt_lower() {
+        let plain_text = "helloworld";
+        let key = "KEY";
+        let expected_ciphertext = "eorhlodlwl";
+
+        let ciphertext = column_transposition_cipher(plain_text, key);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn encrypt_with_space() {
+        let plain_text = "HELLO WORLD";
+        let key = "KEY";
+        let expected_ciphertext = "EOODHLWLL R";
+
+        let ciphertext = column_transposition_cipher(plain_text, key);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn encrypt_with_puncuation() {
+        let plain_text = "hello, world!";
+        let key = "KEY";
+        let expected_ciphertext = "eowlhl r!l,od";
 
         let ciphertext = column_transposition_cipher(plain_text, key);
         assert_eq!(ciphertext, expected_ciphertext);

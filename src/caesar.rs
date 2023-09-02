@@ -33,27 +33,37 @@ mod tests {
     use super::*;
 
     #[test]
-    fn caesar_cipher_encrypt_simple() {
-        let plain_text = "0ABCD!";
-        let shift = 26;
-        let expected_ciphertext = "0ABCD!";
-
-        let ciphertext = caesar_cipher(plain_text, shift);
-        assert_eq!(ciphertext, expected_ciphertext);
-    }
-
-    #[test]
-    fn caesar_cipher_encrypt_simple_lower() {
-        let plain_text = "0abc!";
+    fn encrypt_lower() {
+        let plain_text = "abc";
         let shift = 5;
-        let expected_ciphertext = "0fgh!";
+        let expected_ciphertext = "fgh";
 
         let ciphertext = caesar_cipher(plain_text, shift);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
     #[test]
-    fn caesar_cipher_encrypt() {
+    fn encrypt_upper() {
+        let plain_text = "ABC";
+        let shift = 3;
+        let expected_ciphertext = "DEF";
+
+        let ciphertext = caesar_cipher(plain_text, shift);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn encrypt_with_space() {
+        let plain_text = "ABC DEF";
+        let shift = 3;
+        let expected_ciphertext = "DEF GHI";
+
+        let ciphertext = caesar_cipher(plain_text, shift);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn encrypt_with_puncuation() {
         let plain_text = "HELLO, WORLD!";
         let shift = 3;
         let expected_ciphertext = "KHOOR, ZRUOG!";
@@ -63,7 +73,37 @@ mod tests {
     }
 
     #[test]
-    fn caesar_cipher_decrypt() {
+    fn decrypt_lower() {
+        let plain_text = "fgh";
+        let shift = 5;
+        let expected_ciphertext = "abc";
+
+        let ciphertext = caesar_cipher(plain_text, -shift);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn decrypt_upper() {
+        let plain_text = "DEF";
+        let shift = 3;
+        let expected_ciphertext = "ABC";
+
+        let ciphertext = caesar_cipher(plain_text, -shift);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn decrypt_with_space() {
+        let plain_text = "DEF GHI";
+        let shift = 3;
+        let expected_ciphertext = "ABC DEF";
+
+        let ciphertext = caesar_cipher(plain_text, -shift);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn decrypt_with_puncuation() {
         let ciphertext = "KHOOR, ZRUOG!";
         let shift = 3;
         let expected_plain_text = "HELLO, WORLD!";
