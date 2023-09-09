@@ -27,25 +27,34 @@ mod tests {
     use super::*;
 
     #[test]
-    fn atbash_cipher_encrypt_simple() {
-        let plain_text = "0ABCD!";
-        let expected_ciphertext = "0ZYXW!";
+    fn encrypt_lower() {
+        let plain_text = "abc";
+        let expected_ciphertext = "zyx";
 
         let ciphertext = atbash_cipher(plain_text);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
     #[test]
-    fn caesar_cipher_encrypt_simple_lower() {
-        let plain_text = "0abc!";
-        let expected_ciphertext = "0zyx!";
+    fn encrypt_upper() {
+        let plain_text = "ABC";
+        let expected_ciphertext = "ZYX";
 
         let ciphertext = atbash_cipher(plain_text);
         assert_eq!(ciphertext, expected_ciphertext);
     }
 
     #[test]
-    fn atbash_cipher_encrypt() {
+    fn encrypt_with_space() {
+        let plain_text = "ABC DEF";
+        let expected_ciphertext = "ZYX WVU";
+
+        let ciphertext = atbash_cipher(plain_text);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn encrypt_with_puncuation() {
         let plain_text = "HELLO, WORLD!";
         let expected_ciphertext = "SVOOL, DLIOW!";
 
@@ -54,7 +63,34 @@ mod tests {
     }
 
     #[test]
-    fn atbash_cipher_decrypt() {
+    fn decrypt_lower() {
+        let cipher_text = "zyx";
+        let expected_ciphertext = "abc";
+
+        let ciphertext = atbash_cipher(cipher_text);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn decrypt_upper() {
+        let cipher_text = "ZYX";
+        let expected_ciphertext = "ABC";
+
+        let ciphertext = atbash_cipher(cipher_text);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn decrypt_with_space() {
+        let cipher_text = "ZYX WVU";
+        let expected_ciphertext = "ABC DEF";
+
+        let ciphertext = atbash_cipher(cipher_text);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn decrypt_with_puncuation() {
         let ciphertext = "SVOOL, DLIOW!";
         let expected_plain_text = "HELLO, WORLD!";
 
