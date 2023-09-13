@@ -9,8 +9,4 @@ edition = "2021"
 name = "ciphers"
 path = "src/lib.rs"
 
-[[bin]]
-name = "CipherCraft"
-path = "src/bin/main.rs"
-
 [dependencies]
