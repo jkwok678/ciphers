@@ -25,6 +25,7 @@ pub fn railfence_cipher(text: &str, rails: usize, encrypt: bool) -> String {
             }
         }
         rail = 0;
+        down = false;
         for index in 0..characters.len() {
             if fence[rail][index].is_some() {
                 new_text.push(fence[rail][index].unwrap());
@@ -43,9 +44,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn railfence_cipher_encrypt_simple() {
-        let plain_text = "HELLO WORLD";
-        let expected_ciphertext = "HOREL OLLWD";
+    fn encrypt_lower() {
+        let plain_text = "hello";
+        let expected_ciphertext = "hoell";
         let num_rails = 3;
 
         let ciphertext = railfence_cipher(plain_text, num_rails, true);
@@ -53,9 +54,67 @@ mod tests {
     }
 
     #[test]
-    fn railfence_cipher_decrypt_simple() {
-        let ciphertext = "HOREL OLLWD";
-        let expected_plain_text = "HELLO WORLD";
+    fn encrypt_upper() {
+        let ciphertext = "HELLO";
+        let expected_plain_text = "HOELL";
+        let num_rails = 3;
+
+        let decoded_text = railfence_cipher(ciphertext, num_rails, true);
+        assert_eq!(decoded_text, expected_plain_text);
+    }
+    #[test]
+    fn encrypt_with_punctuation() {
+        let ciphertext = "HELLO!";
+        let expected_plain_text = "HOEL!L";
+        let num_rails = 3;
+
+        let decoded_text = railfence_cipher(ciphertext, num_rails, true);
+        assert_eq!(decoded_text, expected_plain_text);
+    }
+
+    #[test]
+    fn encrypt_with_space() {
+        let ciphertext = "HELLO WORLD!";
+        let expected_plain_text = "HOREL OL!LWD";
+        let num_rails = 3;
+
+        let decoded_text = railfence_cipher(ciphertext, num_rails, true);
+        assert_eq!(decoded_text, expected_plain_text);
+    }
+
+    #[test]
+    fn decrypt_lower() {
+        let plain_text = "hoell";
+        let expected_ciphertext = "hello";
+        let num_rails = 3;
+
+        let ciphertext = railfence_cipher(plain_text, num_rails, false);
+        assert_eq!(ciphertext, expected_ciphertext);
+    }
+
+    #[test]
+    fn decrypt_upper() {
+        let ciphertext = "HOELL";
+        let expected_plain_text = "HELLO";
+        let num_rails = 3;
+
+        let decoded_text = railfence_cipher(ciphertext, num_rails, false);
+        assert_eq!(decoded_text, expected_plain_text);
+    }
+    #[test]
+    fn decrypt_with_punctuation() {
+        let ciphertext = "HOEL!L";
+        let expected_plain_text = "HELLO!";
+        let num_rails = 3;
+
+        let decoded_text = railfence_cipher(ciphertext, num_rails, false);
+        assert_eq!(decoded_text, expected_plain_text);
+    }
+
+    #[test]
+    fn decrypt_with_space() {
+        let ciphertext = "HOREL OL!LWD";
+        let expected_plain_text = "HELLO WORLD!";
         let num_rails = 3;
 
         let decoded_text = railfence_cipher(ciphertext, num_rails, false);
