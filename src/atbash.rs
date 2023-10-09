@@ -29,72 +29,72 @@ mod tests {
     #[test]
     fn encrypt_lower() {
         let plain_text = "abc";
-        let expected_ciphertext = "zyx";
+        let expected_cipher_text = "zyx";
 
-        let ciphertext = atbash_cipher(plain_text);
-        assert_eq!(ciphertext, expected_ciphertext);
+        let cipher_text = atbash_cipher(plain_text);
+        assert_eq!(cipher_text, expected_cipher_text);
     }
 
     #[test]
     fn encrypt_upper() {
         let plain_text = "ABC";
-        let expected_ciphertext = "ZYX";
+        let expected_cipher_text = "ZYX";
 
-        let ciphertext = atbash_cipher(plain_text);
-        assert_eq!(ciphertext, expected_ciphertext);
+        let cipher_text = atbash_cipher(plain_text);
+        assert_eq!(cipher_text, expected_cipher_text);
     }
 
     #[test]
     fn encrypt_with_space() {
         let plain_text = "ABC DEF";
-        let expected_ciphertext = "ZYX WVU";
+        let expected_cipher_text = "ZYX WVU";
 
-        let ciphertext = atbash_cipher(plain_text);
-        assert_eq!(ciphertext, expected_ciphertext);
+        let cipher_text = atbash_cipher(plain_text);
+        assert_eq!(cipher_text, expected_cipher_text);
     }
 
     #[test]
     fn encrypt_with_puncuation() {
         let plain_text = "HELLO, WORLD!";
-        let expected_ciphertext = "SVOOL, DLIOW!";
+        let expected_cipher_text = "SVOOL, DLIOW!";
 
-        let ciphertext = atbash_cipher(plain_text);
-        assert_eq!(ciphertext, expected_ciphertext);
+        let cipher_text = atbash_cipher(plain_text);
+        assert_eq!(cipher_text, expected_cipher_text);
     }
 
     #[test]
     fn decrypt_lower() {
         let cipher_text = "zyx";
-        let expected_ciphertext = "abc";
+        let expected_plain_text = "abc";
 
-        let ciphertext = atbash_cipher(cipher_text);
-        assert_eq!(ciphertext, expected_ciphertext);
+        let plain_text = atbash_cipher(cipher_text);
+        assert_eq!(plain_text, expected_plain_text);
     }
 
     #[test]
     fn decrypt_upper() {
         let cipher_text = "ZYX";
-        let expected_ciphertext = "ABC";
+        let expected_plain_text = "ABC";
 
-        let ciphertext = atbash_cipher(cipher_text);
-        assert_eq!(ciphertext, expected_ciphertext);
+        let plain_text = atbash_cipher(cipher_text);
+        assert_eq!(plain_text, expected_plain_text);
     }
 
     #[test]
     fn decrypt_with_space() {
         let cipher_text = "ZYX WVU";
-        let expected_ciphertext = "ABC DEF";
+        let expected_plain_text = "ABC DEF";
 
-        let ciphertext = atbash_cipher(cipher_text);
-        assert_eq!(ciphertext, expected_ciphertext);
+        let plain_text = atbash_cipher(cipher_text);
+        assert_eq!(plain_text, expected_plain_text);
     }
 
     #[test]
     fn decrypt_with_puncuation() {
-        let ciphertext = "SVOOL, DLIOW!";
+        let cipher_text = "SVOOL, DLIOW!";
         let expected_plain_text = "HELLO, WORLD!";
 
-        let decrypted_text = atbash_cipher(ciphertext);
-        assert_eq!(decrypted_text, expected_plain_text);
+        let plain_text = atbash_cipher(cipher_text);
+        assert_eq!(plain_text, expected_plain_text);
     }
 }
